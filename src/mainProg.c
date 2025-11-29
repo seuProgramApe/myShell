@@ -9,16 +9,17 @@
 
 int main()
 {
-  // 屏蔽 ctrl+c 中断
+  // inhibit ctrl+c interrupt
   signal(SIGINT, SIG_IGN);
-  // 程序关闭只能使用 ctrl+d 输入 EOF
 
-  usr_info user;
-  shell_rt shell;
+  usr_info user; // defined in user_info.h
+  shell_rt shell; // defined in shell_runtime.h
+
   if (make_usr_info(&user) == NULL) {
     throw_error("login", "create user failure");
     exit(constructorError);
   }
+  
   if (create_shell(&shell, &user) == NULL) {
     throw_error("login", "create shell failure");
     exit(constructorError);
