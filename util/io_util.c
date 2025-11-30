@@ -5,7 +5,6 @@
 #include "error_handle.h"
 #include "string_util.h"
 
-
 void input_str(FILE* infile, char* dest, int char_limit, const char* prompt) {
   if (dest == NULL || char_limit == 0)
     return;
@@ -22,6 +21,13 @@ void input_str(FILE* infile, char* dest, int char_limit, const char* prompt) {
       puts("\nexit"); // receive EOF, terminate the process
       exit(receivedEOF);
     }
+
+    size_t len = strlen(dest);
+    if(len > 0 && dest[len - 1] != '\n') {
+      int c;
+      while((c = fgetc(infile)) != '\n' && c != EOF);
+    }
+
     trimmed = trim_str(dest, strlen(dest) + 1);
   } while (trimmed[0] == NIL_CHAR);
 
