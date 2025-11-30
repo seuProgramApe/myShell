@@ -54,11 +54,11 @@ usr_info* make_usr_info(usr_info* const this) {
   if (dir != NULL)
     closedir(dir);
   else if (make_dir(&this->name, 1) == failed) {
-    release_usr(this); // 异常安全保证
+    release_usr(this);
     throw_error("login", "create home dir failure");
     return NULL;
   }
-  change_wd(this->name);
+  change_wd(this->name); // change working directory to this->name
 
   return this;
 }

@@ -14,10 +14,11 @@ const ExprLenT read_limit = 1024;
 
 shell_rt* create_shell(shell_rt* const this, usr_info* logged_usr)
 {
-  this->_origianl_expr = (char*)calloc(sizeof(char), read_limit + 1);
+  this->_origianl_expr = (char*)calloc(read_limit + 1, sizeof(char)); // 原始命令串
   if (this->_origianl_expr == NULL)
     return NULL;
-  this->_processed_expr = (char*)calloc(sizeof(char), read_limit + 1);
+
+  this->_processed_expr = (char*)calloc(read_limit + 1, sizeof(char)); // 处理后命令串
   if (this->_processed_expr == NULL) {
     release_ptr(this->_origianl_expr);
     return NULL;

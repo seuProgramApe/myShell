@@ -15,15 +15,16 @@ int main()
   usr_info user; // defined in user_info.h
   shell_rt shell; // defined in shell_runtime.h
 
-  if (make_usr_info(&user) == NULL) {
+  if (make_usr_info(&user) == NULL) { // construct an instance of usr_info
     throw_error("login", "create user failure");
     exit(constructorError);
   }
   
-  if (create_shell(&shell, &user) == NULL) {
+  if (create_shell(&shell, &user) == NULL) { // construct an instance of shell_rt
     throw_error("login", "create shell failure");
     exit(constructorError);
   }
+  
   const char *prompt_fmt = STYLIZE("%s@%x", FNT_GREEN FNT_BOLD_TEXT) ":" STYLIZE("%s", FNT_BLUE FNT_BOLD_TEXT) "$ ";
   const size_t basic_len = name_limit + uid_len + strlen(prompt_fmt);
 
