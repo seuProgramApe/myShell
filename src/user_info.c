@@ -42,9 +42,9 @@ usr_info* make_usr_info(usr_info* const this) {
 
   char* blank_char = NULL;
   do {
-    input_str(stdin, this->name, name_limit, STYLIZE("Login as", FNT_CYAN FNT_BOLD_TEXT) ": "); // dest: this->name
     int c;
     while ((c = getchar()) != '\n' && c != EOF); // empty the input buffer
+    input_str(stdin, this->name, name_limit, STYLIZE("Login as", FNT_CYAN FNT_BOLD_TEXT) ": "); // dest: this->name
     blank_char = strpbrk(this->name, " \t\n\v\f\r");
     if (blank_char != NULL)
       throw_error("login", "whitespace characters are not allowed");
