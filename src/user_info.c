@@ -30,19 +30,20 @@ void release_usr(usr_info* const this) {
 }
 
 usr_info* generate_uid(usr_info* const this) {
-  this->uid = time(NULL); // time stamp
+  this->uid = time(NULL);
   return this;
 }
 
 usr_info* make_usr_info(usr_info* const this) {
   usr_info* result = create_usr(this);
   if (result == NULL)
-    return NULL;
-  this->set_uid(this);
+    return NULL; // create_usr fail, return NULL
+  this->set_uid(this); // set uid to current time stamp
 
   char* blank_char = NULL;
   do {
-    input_str(stdin, this->name, name_limit, STYLIZE("Login as", FNT_CYAN FNT_BOLD_TEXT) ": ");
+    input_str(stdin, this->name, name_limit, STYLIZE("Login as", FNT_CYAN FNT_BOLD_TEXT) ": "); // dest: this->name
+    fflush(stdin);
     blank_char = strpbrk(this->name, " \t\n\v\f\r");
     if (blank_char != NULL)
       throw_error("login", "whitespace characters are not allowed");
